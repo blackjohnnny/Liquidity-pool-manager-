@@ -1,0 +1,43 @@
+[
+    {
+        "inputs": [
+            {"internalType": "uint256", "name": "_tokenId", "type": "uint256"}
+        ],
+        "name": "harvest",
+        "outputs": [
+            {"internalType": "uint256", "name": "reward", "type": "uint256"}
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {"internalType": "uint256", "name": "_tokenId", "type": "uint256"}
+        ],
+        "name": "pendingCake",
+        "outputs": [
+            {"internalType": "uint256", "name": "", "type": "uint256"}
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {"internalType": "uint256", "name": "", "type": "uint256"}
+        ],
+        "name": "userPositionInfos",
+        "outputs": [
+            {"internalType": "uint128", "name": "liquidity", "type": "uint128"},
+            {"internalType": "uint128", "name": "boostLiquidity", "type": "uint128"},
+            {"internalType": "int24", "name": "tickLower", "type": "int24"},
+            {"internalType": "int24", "name": "tickUpper", "type": "int24"},
+            {"internalType": "uint256", "name": "rewardGrowthInside", "type": "uint256"},
+            {"internalType": "uint256", "name": "reward", "type": "uint256"},
+            {"internalType": "address", "name": "user", "type": "address"},
+            {"internalType": "uint256", "name": "pid", "type": "uint256"},
+            {"internalType": "uint256", "name": "boostMultiplier", "type": "uint256"}
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]

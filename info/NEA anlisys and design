@@ -1,0 +1,831 @@
+NEA computer science a level project 
+By Zejin Xu 
+Project title : auto liquidity fund allocation bot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+目录
+Analysis -	3
+Introduction to project	3
+Breaking down – what is a Liquidity pool?	4
+The issue	4
+Stakeholder conversation	6
+Existing examples	9
+Computational methods	14
+Methodologies	16
+System and data requirements	18
+Limitations	20
+Success criteria	22
+Hardware and System Requirements	24
+Design	28
+Problem decomposition	28
+Layer 1 — System Core	28
+Layer 2 — Functional Modules	29
+System architecture	32
+Control And Logic Layer	33
+Data and Security Layer	34
+Interface Layer	34
+Architectural Justification	35
+Key Variables and Data Structures	35
+Configuration and Security Variables	35
+Market and Execution Variables	36
+System State and Performance Variables	36
+Summary of Key Variables	36
+Algorithms and Logic Design	39
+Scheduler & Cycle Control Algorithm	39
+Market Data Fetching and Validation Algorithm	41
+Decision-Making and Rebalancing Algorithm	43
+Fail-Safe and Error Handling Algorithm	45
+User Interface Design	46
+Testing Strategy	48
+Traceability to Success Criteria	50
+
+
+
+
+
+
+
+
+Analysis - 
+Introduction to project
+I would like to build a liquidity pool fund allocation system/tool that has a interface on telegram for this computing project, but before we get into the details, we need to understand the concept behind this system.
+Breaking down – what is a Liquidity pool?
+Firstly, a liquidity pool in this case is one of the most important aspects of decentralised Web3 and blockchain technology, a liquidity pool is like the Jerusalem of decentralised crypto trading and development.
+So what actually is a liquidity pool (LP)?
+A liquidity pool, or (LP), is basically a smart contract that holds two different crypto tokens in a pair , for example, ETH and USDT can be held in a that pool uses these two assets to let people swap one for the other at any time, without needing a middleman or traditional order book like in Binance , Coinbase or many other traditional exchanges.
+So instead of matching buyers and sellers, the LP is always ready to trade with you directly , and when you put in ETH and want USDT, the LP calculates the price using a special formula (normally something like xy=k*) and gives you the USDT. The ETH you give in goes into the pool, and the USDT comes out.
+As people trade, the price shifts automatically, based on supply of the 2 tokens, as one token is demanded more the other one will be used to swap so there will be more of one token and less of the other. This is why prices can change rapidly, it’s all happening inside the pool.
+And finally the core of this project is aiming at People (called liquidity providers) put money into the pool and in return earn a cut of the trading fees. These fees are what drives people to provide liquidity in these pools and earn a profit.
+Investing in a LP pool allows the investor to take 50% less risk and make 50% less profit in that specific trading pair due to it’s mechanisms, in more recent developments a price range could be set for a pair of LP which allows more control for the investor and is one of the key features this project will integrate.
+
+
+The issue
+The stakeholder for this project is an experienced crypto investor who is confident in DeFi and liquidity provisioning but finds it difficult to efficiently manage their capital without constantly monitoring market conditions. They explained that one of their main challenges is accurately matching their investment size to the level of opportunity available — without taking on more risk than they are comfortable with.
+Although they understand the potential of liquidity pools (LPs), the current manual process of checking platforms like Uniswap or PancakeSwap, comparing pool returns, managing risk exposure, and rebalancing investments is too time-consuming and impractical. For someone who wants to stay on top of fast-moving opportunities but doesn’t have time to check multiple dashboards every few hours, this leads to inefficiencies and missed returns.
+They also pointed out the lack of a tool that can simulate potential profit and risk outcomes before investing. At present, most tools focus only on displaying real-time APYs and liquidity data — they don’t help users decide how much to invest, where, or why based on the user’s goals.
+This project addresses those pain points by providing the stakeholder with a Telegram-based bot that:
+•	Automatically tracks high-yield liquidity pools,
+•	Categorises pools by volatility level,
+•	Allocates capital intelligently based on risk-reward ratio,
+•	Simulates potential outcomes,
+•	Adjusts positions without the user needing to constantly intervene.
+The system is designed to save the stakeholder time, reduce cognitive load, and help them maintain a more balanced and consistent return — without the need for constant manual oversight.
+
+
+Image 1
+
+
+
+
+
+
+
+
+
+
+Stakeholder conversation
+For my stake holder, I was able to interview the founder and ceo of COLF.ai and he also happens to be active in the crypto market and has a large portfolio in the LP sector.
+
+And here is the QNA:
+I’m developing a tool that automatically tracks and allocates funds into the most optimal liquidity pools based on user preferences, aiming to reduce manual work and maximise returns. I’d love to hear your input as someone experienced in the space.
+
+1. As someone experienced in crypto or DeFi investments, what is one major issue you’ve faced when trying to manage or allocate funds across different liquidity pools?
+
+The main issue is inefficiency. I’m not going to waste time manually chasing APR changes across five protocols and three blockchains. LP investing right now is fragmented, slow, and reactive. There’s no cohesive system that dynamically allocates based on risk, volatility, and ROI and frankly, that’s a gap that needs solving.
+
+2. How has this problem impacted your investments, decision-making, or overall performance in the market?
+
+I’ve seen capital sit in underperforming pools for days just because I didn’t have the bandwidth to babysit it. And by the time you react, the yield opportunity is gone. In this space, speed and automation are everything. You either move early, or you get left behind. The lack of a responsive, real-time allocation tool directly limits profitability.
+
+3. If a tool was developed to automate and optimise LP fund allocation, what specific features would you find essential?
+
+Non-negotiables: real-time data sync, risk-based allocation presets, and cross-chain integration from day one. If it doesn’t cover at least Ethereum, Arbitrum, and BSC, I’m not interested. Telegram control is a smart move it aligns with how serious investors operate day to day. The UI doesn’t have to be flashy, but it must be fast and reliable.
+
+4. If those core features were successfully implemented, what additional features or long-term improvements would you like to see in the future?
+
+Long term, I want predictive allocation something AI-driven that can front-run high-yield trends before the crowd catches on. I’d also like to see wallet analytics, custom pool filters, and maybe even multi-wallet coordination. If you can turn this from a tool into a full capital allocator across DeFi, that’s where the real value is.
+
+-the end 
+—————————————————————————————————————
+
+The person I spoke to is a high-level investor with a lot of experience in DeFi and LP-based investing. Straight away, they pointed out how annoying and inefficient it is to keep track of different liquidity pools across chains. What stood out was how fast everything moves APRs spike and crash in literally a few hours, and without some kind of system in place, it’s almost guaranteed that you’re going to miss something or lose out.
+
+From what they said, the main issue is time and visibility. They’ve got capital spread across 10+ pools, and there’s no quick way to know what’s doing well or when something needs rebalancing. That basically confirmed to me that this problem is real and happening daily to actual investors. It’s not just about wanting better returns it’s about being able to keep up with how fast LP conditions change.
+
+They also mentioned trying to solve the problem themselves using spreadsheets, APIs, and even hiring someone to make a custom dashboard but nothing actually worked long term. It was all too manual or didn’t react fast enough. That just made it clearer that my system can’t just show data it has to make decisions or recommendations automatically, and ideally even execute them. The user shouldn’t have to micromanage it.
+
+In terms of features, they were very decisive. If the system doesn’t have live data, cross-chain support, and Telegram integration, it’s basically a no-go. They also mentioned that in the future, it should be able to predict yield changes, show performance analytics, and maybe even include social features like strategy sharing. That gave me a few ideas for what I could include as possible stretch goals if I had more time or resources.
+
+So overall, this interview helped me lock in what the project should be doing and more importantly, what the user needs. The way this investor explained the issue really showed that there’s a gap in the market and my system is heading in the right direction. It’s not just a helpful tool it could be a serious solution to a real-world investment problem.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Existing examples 
+When it comes to examples that match my idea, there actually isn’t a system out there that does exactly what I’m building. This could be for a few reasons like teams wanting to keep a competitive edge or just not having the time to develop something like this due to complexity. Therefore, most existing samples are kept private or worse used as a fishing tool to steal users capital by batting investors in using it but untimely scamming uses . So, to properly analyse what already exists, I’ve broken it down into two parts: functionality and interface.
+
+⸻
+
+Functionality
+For the functionality side, I originally planned to investigate both Uniswap (the biggest decentralised exchange on the Ethereum network by volume) and PancakeSwap (the biggest DEX on Binance Smart Chain). However, during my research, I realised that PancakeSwap has basically integrated or forked a large part of Uniswap’s system, since Uniswap is open source. Because of that, there’s no real point in analysing both separately as PancakeSwap already includes the core features from Uniswap, but built to run on BSC, which is faster and cheaper. So, for this project, I’m only focusing on PancakeSwap as my example for DEX functionality and LP interaction. Looking at image 1 we can see a rough version of the kind of core functions I want to include. 
+First, the user should be able to input their crypto wallet’s private key for the system to gain access to their funds, after, the user can input the amount of capital they want to stake. The system will use an algorithm to auto-balance that capital into the most suitable liquidity pools based on performance and risk level.
+The user will also choose a time they plan to stay invested this doesn’t lock the funds, but it helps the system estimate projected returns based on the current APR, so they can make better decisions. Another feature will be an auto-compound setting, where the user can choose how often the bot compounds their earnings allowing for exponential growth through interest-on-interest.
+There’s also a more advanced option shown in the image: setting a custom price range (like in Uniswap v3). This allows advanced users to fine-tune where they want to provide liquidity. I plan to simplify this concept in my system so it’s more user-friendly and doesn’t require a deep understanding of LP mechanics.
+As shown in Image 2, users often see a long list of LP pairs to choose from this can be extremely overwhelming, especially for people new to DeFi. In my system, I’ll solve this by grouping LP pairs by risk level (low, medium, high) based on factors like token volatility, utility, and market cap. That way, users can make safer and more informed choices without needing deep technical knowledge.
+
+⸻
+Interface
+For the interface side of things, I’ve looked at Unibot, a Telegram-based trading bot (see Image 3). One of the things it does well is user convenience everything is accessible through Telegram, which is a key part of my project too. The way it displays wallet info, balances, and options makes it easy for people with even basic crypto knowledge to use it effectively.
+However, Unibot’s layout can sometimes feel a bit cluttered. Wallet addresses are always shown, which could confuse or overwhelm some users. A better option in my system would be to make wallet display optional, and instead focus on active LP positions, current APRs, and time since last reallocation this helps users feel more in control of their assets and decisions.
+Another issue I noticed is that once a command is sent, the data can become outdated quickly, which can mislead the user. To fix this, I plan to include an “Update” button that re-checks all metrics live and refreshes the display this would avoid any misinformation and build more trust in the bot.
+Overall, my idea is to take the core functionality from PancakeSwap — for example, the ability to enter and manage LP positions, display live LP data, and show estimated earning potential. I like this because PancakeSwap already handles liquidity pool mechanics reliably and gives all the data needed for decision-making. For my project, I will use these existing features as the foundation, but I’ll simplify the way the data is displayed so it’s easier for users who don’t have advanced DeFi knowledge.
+
+For the interface side, I looked at Unibot’s Telegram system. What I like about it is the convenience of running everything inside Telegram, as well as how the commands and balances are shown in one place. I will use this style of Telegram interface in my own project because it makes interaction fast and familiar for users. However, I noticed that Unibot’s layout can feel cluttered. To improve on this, I’ll reorganise how the bot outputs information, so messages are structured more clearly, and I’ll make the input buttons better organised to guide the user step by step.
+Image 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Image 3
+
+
+
+
+Computational methods
+The issue of poor LP investment decisions and lack of automation is clearly solvable by computational methods mainly because it involves structured data, pattern recognition, and rule-based logic. These are all things that can be broken down and handled using decomposition and abstraction two key ideas in computational thinking.
+Computational thinking was central to the design and development of this project. The problem of allocating funds to optimal liquidity pools is complex due to the dynamic nature of crypto markets, variable risk profiles, and the need for continuous automation. To handle this, I applied five core computational thinking methods: abstraction, decomposition, pattern recognition, automation, and evaluation.
+
+Abstraction
+Abstraction involves removing unnecessary detail and focusing only on the information that is needed to solve the problem. In this project, DeFi concepts like impermanent loss, price volatility, and pool risk are abstracted into four categories:
+•	Low risk: stablecoin → stablecoin
+•	Medium risk: stablecoin → large-cap
+•	High risk: large-cap → large-cap
+•	Extreme risk: low-cap → low-cap
+By abstracting pools into risk tiers, the bot avoids handling complex live token correlations and instead uses clear, generalised groupings to guide allocation. Similarly, the bot treats all supported platforms (e.g. PancakeSwap, Uniswap) through a common API layer, abstracting away the differences in their interfaces.
+
+Decomposition
+Decomposition is the process of breaking a complex problem into smaller, more manageable parts. I decomposed the system into six independent modules:
+1.	Data Retrieval Module: fetches LP data (ROI, token types, liquidity, etc.)
+2.	Risk Classification Module: determines pool volatility based on token pair
+3.	Capital Allocation Algorithm: distributes funds based on user-defined risk profile
+4.	Telegram Interface: handles all bot-user communication
+5.	Rebalancing Scheduler: manages timing for auto-adjustments
+6.	Simulation Engine: forecasts estimated performance for each pool
+Each of these modules can be developed, tested, and maintained separately, making the system easier to build and debug.
+
+Pattern Recognition
+This technique is used to spot trends and relationships in pool data that inform decision-making. For example:
+•	Pools containing stablecoins tend to have lower volatility but more consistent returns.
+•	Low-cap tokens often produce higher APY but with more fluctuation.
+The bot uses these patterns to match pool types with the user's selected risk level. It also recognises price deviation patterns to decide when to exit or reallocate funds automatically (e.g. if price moves outside the defined range).
+
+Automation
+Automation is a key aim of the project. Once the user configures their preferences, the bot performs the following tasks autonomously:
+•	Scans available LPs across chains
+•	Filters based on risk and volatility settings
+•	Simulates expected ROI vs risk
+•	Allocates capital
+•	Monitors pools and rebalances if needed
+•	Sends performance updates through Telegram
+This automation significantly reduces the need for manual input and allows the system to run 24/7 — which is essential for volatile crypto markets.
+
+Evaluation
+Evaluation ensures that the final product meets the intended goals and performs reliably. Each component is tested against criteria such as:
+•	Accuracy: Is the bot allocating funds to pools that match the user’s selected risk tier?
+•	Reliability: Does the scheduler execute rebalancing on time?
+•	Usability: Can users control the bot entirely through Telegram?
+•	Performance: Do ROI simulations closely match actual past performance?
+In addition, unit tests are written for key functions (e.g. allocation logic, risk detection), and system testing is done using sandbox wallets with test LP data. All success criteria are directly linked to evaluation outcomes.
+
+Conclusion
+By applying computational thinking throughout the design and development process, I have created a system that is logical, modular, scalable, and user-friendly. These methods allowed me to simplify complex DeFi mechanics and build a product that meets the needs of real stakeholders in an efficient and systematic way.
+
+
+
+
+
+Methodologies 
+
+For this project, I’ve chosen to follow an Agile methodology, because it allows me to build and improve the system step by step which suits a Telegram bot really well. Since my bot has multiple moving parts (real-time data, user inputs, logic systems, risk filters, wallet connection, etc.), I need an approach that’s flexible and lets me make changes as I go.
+
+Agile works by breaking the project into small tasks (sprints) that I can build and test individually. At the end of each sprint, I’ll test the feature and decide what needs to be improved or added next. This is especially useful when dealing with APIs and wallet logic, where errors or changes in external platforms are common.
+
+A key part of the system is the ability for users to import their own wallet using a private key. This feature will be handled early in the project because it’s essential for the bot to be able to execute real transactions (allocate funds into LPs). From a programming point of view, the wallet import will be done by:
+	•	Allowing the user to send a /import command in Telegram
+	•	The bot will receive and securely store the private key (only temporarily, ideally using encryption in memory)
+	•	It will then generate the public address and confirm the wallet is connected
+	•	The private key will be used only when signing transactions, and should never be stored permanently, for security reasons
+
+This part will be implemented in one of the first development sprints, as it’s a building block for the rest of the system.
+
+I also considered using the Waterfall model, but that wouldn’t work well for this type of system. Waterfall is too rigid once you’ve designed everything, it’s hard to go back. But my project needs flexibility: pool APRs change, APIs might behave differently, and even user feedback might suggest changes to Telegram commands or risk logic. Agile gives me the flexibility to adjust throughout.
+
+I’ll structure the project into sprints like:
+	•	Sprint 1: Wallet import and key validation
+	•	Sprint 2: Telegram command handling
+	•	Sprint 3: LP data collection and filtering
+	•	Sprint 4: Allocation and auto-compound logic
+	•	Sprint 5: Risk rating and user configuration
+	•	Sprint 6: Final testing, UX polishing, update button, and error handling
+
+Agile also encourages continuous testing, so at each stage I’ll be checking that the logic works properly. For example, I’ll test whether the private key really links to the correct wallet address and whether the bot signs transactions correctly.
+
+In summary, Agile is the most suitable method because it allows me to adapt the project as it grows, get feedback along the way, and focus on delivering a working system one part at a time starting with critical core features like secure wallet import.
+
+
+
+
+
+
+
+
+System and data requirements 
+For this project to work, the system needs to be able to collect live LP (liquidity pool) data, process it using my logic, and respond to the user via Telegram in real-time. So I’ve broken it down into what’s needed for both the backend system (the code and processing) and the data side (everything the system needs to make allocation decisions).
+
+⸻
+
+System Requirements (Software & Runtime)
+	•	Python 3.10+ the main programming language. It has great support for APIs, Telegram bots, and numerical logic.
+	•	Telegram Bot API lets me receive and respond to messages from the user. I’ll register the bot using BotFather and handle commands like /import, /allocate, /update, etc.
+	•	Python-Telegram-Bot library used to build the Telegram interface in a clean way.
+	•	Web3.py this allows the bot to interact with the blockchain (like sending transactions, reading LP values, etc.)
+	•	Node provider (like Infura or Ankr) needed to connect to the actual blockchain and get live data or sign transactions.
+	•	Basic command-line terminal (for development and testing)
+	•	No database is used all important data is kept in memory for simplicity and security (e.g. private keys never get saved).
+
+This setup can run on any low-power machine or virtual server (e.g. local PC, Raspberry Pi, or a VPS). The project is designed to stay lightweight.
+Data Requirements
+My bot needs to access real-time liquidity pool data to make smart decisions. This includes:
+	•	APR/APY of each LP to calculate estimated returns
+	•	Volatility scores or token price movement used to classify risk
+	•	Total Value Locked (TVL) shows how much money is in each pool (low TVL = risky)
+	•	Token pair details so the system knows what coins are involved
+	•	User input such as risk level, stake amount, time preference
+I’ll use external APIs like:
+	•	PancakeSwap Subgraph or REST API for LP metrics (APR, pairs, TVL)
+	•	DeFiLlama API for cross-platform APR comparison if needed
+	•	CoinGecko API for price volatility or market cap data
+
+All this data is processed in memory and combined with user preferences to generate allocation results.
+
+Wallet Data Handling
+Users will need to import their private key to let the bot manage funds. This is done through a Telegram command, and the key is held only in memory for that session. It is never stored or logged anywhere. This keeps things safe and avoids long-term risk.
+
+Setup
+	•	It’s lightweight and doesn’t require a full backend database.
+	•	Python handles both the Telegram interface and blockchain logic well.
+	•	Data from APIs keeps the system accurate and up to date.
+	•	It’s secure enough for a school-level project while showing understanding of privacy and safety risks.
+
+
+Limitations 
+Although this system can solve a real-world problem by automating LP fund allocation, there are still some limitations due to technical complexity, system dependencies, and development scope. These limitations don’t stop the tool from working but they do show where improvements could be made with more time, resources, or experience.
+Technical Limitations
+	•	Smart contract interaction is limited – While my system interacts with PancakeSwap’s existing smart contracts (like the Router and MasterChef), I’m not deploying custom contracts. This means I can’t create custom vaults, automate fee structures, or handle advanced on-chain behaviours though I can still execute core DeFi functions like adding liquidity and simulating compounding.
+	•	No database or persistent storage – The bot doesn’t use a database to store user preferences, history, or past performance. This means every session is stateless unless the user reuses their chat thread. There’s no long-term tracking or analytics.
+	•	External API reliance – The bot depends on live data from PancakeSwap, DeFiLlama, and CoinGecko. If any of these APIs go offline, slow down, or return bad data, the bot won’t be able to accurately calculate APR or pool risk.
+	•	Telegram interface limitations – Telegram works well for command-based bots, but it’s not a visual UI. Long LP lists, APR stats, or wallet summaries can become hard to read. Also, messages can go stale, so users must manually refresh using /update.
+
+Design Limitations
+	•	Simplified risk scoring – My bot groups LPs into low, medium, or high risk based on volatility, liquidity, and market cap. However, it doesn’t account for smart contract audits, rug pull history, or liquidity lock status all of which affect real-world risk.
+	•	Manual compounding logic – Although the bot can simulate compounding by harvesting rewards and reinvesting them through PancakeSwap’s smart contracts, the logic is still scripted. It doesn’t adjust dynamically or optimise fees like advanced vault protocols (e.g. Beefy).
+
+Time & Scope Limitations
+	•	BSC-only integration – To keep things manageable, I focused on Binance Smart Chain and PancakeSwap only. Adding support for Ethereum, Arbitrum, or other chains would require extra API integration, contract handling, and gas logic.
+	•	No on-chain analytics – There’s no way to track long-term yield, APY trends, or user performance over time. This would be useful in a real-world version, but I didn’t have time to build a dashboard or logging system.
+	•	No error recovery or fallback logic – If a transaction fails (e.g. due to gas or slippage), the bot doesn’t retry or notify the user beyond the basic error message. This would need to be added for smoother UX in production.
+
+
+Security Limitations
+	•	Private key storage in chat memory – In my setup, the user imports their private key through Telegram, and the bot stores it in the chat context (not in a file or database). This makes it easier for the bot to keep using the key across sessions without re-importing but it also means the key is exposed unless the user deletes it.
+To fix this, I’ve added a /reset command that lets the user completely wipe their session and remove the key. It works fine for a prototype, but in real use, I’d need to upgrade this to something like encrypted storage or WalletConnect integration to make it truly secure.
+
+Conclusion
+Even with these limitations, my system still works as a functional and realistic prototype. It automates LP investing, uses real data, and gives the user a usable interface to make informed decisions. Most of the limitations listed here from vault optimisation to security upgrades  are fixable with more time or funding, and could be future improvements to make the project more production-ready.
+
+
+
+Success criteria
+To know if my project has been successful, I’ve set out a list of clear goals that the system must meet. These criteria are based on the original problem (the complexity of LP investing and the lack of automation), the feedback from stakeholders, and the features I’ve planned and implemented.
+
+These are split into essential features (must be included), desirable features (nice to have), and stretch goals (if time and resources allowed).
+
+SuccessCriteria	Why it matter
+The user can import their wallet using a private key and the bot can sign transactions	This is needed for the bot to interact with LP smart contracts (e.g. add liquidity, claim rewards) and simulate real fund control.
+The bot can fetch and display live LP data including APR, token pair, and TVL	Users need up-to-date info to make accurate investment decisions the system must pull this data from APIs in real-time.
+The user can select their risk level (low, medium, high), and the bot filters LPs accordingly	This makes the system beginner-friendly and reduces poor decisions caused by volatility or low liquidity pools.
+The bot can auto-allocate funds based on logic (risk + APR) and display the result in Telegram	This is the core function of the project using computational logic to help users invest better
+Telegram commands like /import, /allocate, /update, and /reset must work properly	These commands control the bot and must function consistently for the user to interact with it.
+
+
+Desirable Criteria 
+Success Criteria 	Why it matters
+Auto-compounding logic is implemented using PancakeSwap’s smart contracts	This simulates real growth and adds long-term value to the user’s LP position.
+APR estimate is shown based on user’s input stake and selected pool	Helps users estimate their return before investing, making the bot more informative.
+The system categorises LPs by risk automatically using price volatility and market cap	Prevents the user from getting overwhelmed by random LP pairings.
+The private key is stored in the Telegram context only, with the ability to reset/wipe	Adds a basic level of session security while keeping usability high.
+
+Stretch Criteria – ever better if 
+Success Criteria	Why it matters
+Add support for more chains (e.g. Ethereum, Arbitrum) and other DEXs	Add support for more chains (e.g. Ethereum, Arbitrum) and other DEXs
+Makes the system more powerful and flexible for advanced DeFi users.
+Real-time rebalancing or alerts when APR drops or pool risk increases	Allows smarter, automated exits or repositioning during volatile conditions.
+Analytics tab showing user portfolio growth and yield over time	Improves trust and lets users track performance visually.
+Advanced Telegram GUI (e.g. inline buttons, charts, drop-down risk filters)	Makes the bot more intuitive, even for users without deep crypto knowledge.
+
+How I Will Measure Success
+	•	I will test each command and function during development and at the end.
+	•	I’ll verify that the bot connects to the correct APIs, handles errors, and sends signed transactions successfully.
+	•	I will simulate test investments and measure whether the allocation logic chooses appropriate pools based on risk and APR.
+	•	The system will be shown to stakeholders (or evaluated by me if user testing is limited) to see if it meets their original needs and expectations.
+
+Finally, the project is considered successful if it meets all the essential criteria and at least some of the desirable ones. If I meet any stretch goals, that will show I’ve gone above and beyond what was required proving I’ve really understood the problem and created a tool that offers genuine value.
+
+
+
+
+
+
+
+
+
+
+Hardware and System Requirements
+This section outlines the hardware and software requirements needed to run and interact with the automated liquidity pool allocation bot. It covers both the end-user system (Telegram-based interaction) and the developer/server system (where the bot is hosted and executed).
+
+5.1 End-User System Requirements
+The end user does not need any special hardware or software to use the system. The bot is designed to be lightweight and accessible through the Telegram messaging platform.
+To use the bot, the user simply needs:
+•	A device that can run the Telegram app — this includes smartphones (iOS or Android), tablets, desktop computers, or web browsers.
+•	A stable internet connection, as all commands and updates are transmitted in real-time through the Telegram Bot API.
+•	No installation of additional software is necessary, and all interaction happens through simple chat commands such as /allocate, /withdraw, and /set risk=medium.
+Because all processing is handled server-side, the user’s device does not perform any heavy computation or require storage beyond the Telegram app itself.
+
+5.2 Developer and Hosting Environment
+The bot itself must be hosted on a server, virtual machine, or cloud environment that supports Python 3.9 or later. The system is designed to be lightweight but does benefit from reliable uptime and connectivity for uninterrupted automation.
+The minimum system requirements to host the bot are:
+•	A Linux-based operating system (such as Ubuntu 20.04 or newer).
+•	At least 1 CPU core running at 2.0 GHz and 1 GB of RAM to run the Python environment and external API queries.
+•	At least 500 MB of available storage, which is used for the bot scripts, configuration files, and logs.
+•	A constant internet connection, as the bot must be able to fetch live liquidity pool data and communicate with Telegram users in real time.
+•	Python 3.9 or later must be installed, along with pip for managing dependencies.
+For smoother performance and future scaling, it is recommended to use a server with 2 or more CPU cores, 2–4 GB of RAM, and a high uptime cloud service provider (e.g. AWS, DigitalOcean, or Linode) offering 99.9% reliability.
+
+5.3 Software Dependencies
+The bot is built using Python and relies on several key libraries to function:
+•	python-telegram-bot is used to handle communication between the bot and the Telegram user interface.
+•	requests and optionally web3.py are used to fetch live liquidity pool data from platforms like PancakeSwap and Uniswap.
+•	apscheduler is used to schedule recurring tasks such as daily rebalancing checks.
+•	dotenv is used to store sensitive API keys and configuration variables securely.
+•	pandas may also be used to process, store, and simulate LP performance data.
+In addition, the bot interacts with several external APIs and services:
+•	The Telegram Bot API, for sending and receiving user messages.
+•	Public APIs or subgraph endpoints from Uniswap, PancakeSwap, or similar DEX platforms.
+•	RPC endpoints for supported blockchains (e.g. BSC and Ethereum).
+All external services are accessed securely, with proper error handling and API request limits where applicable.
+
+5.4 Security and Maintainability
+Security is handled by:
+•	Keeping all sensitive data such as API keys and Telegram tokens in environment variables (via .env files), not hard coded into the bot.
+•	Using simple logging to track bot behaviour, API errors, and user actions for debugging or auditing.
+•	Optional Dockerisation or virtual environment setup can be used to ensure reproducibility and safe deployment across machines.
+The system is designed to be maintainable by a developer with basic Python experience and can be updated by modifying individual modules (e.g. adjusting risk filters or adding support for new platforms).
+
+Conclusion
+The system has been designed to be efficient and accessible. Users can run it with nothing more than a Telegram app and an internet connection, while the developer or maintainer can host the bot on an inexpensive VPS or cloud server with minimal resources. This makes it suitable for independent investors, small teams, or future scaling to a broader user base without significantly increasing infrastructure requirements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Design 
+Problem decomposition 
+The first stage in the design process was to break the system down into a clear set of modules. This type of decomposition makes the system easier to understand, more reliable, and easier to expand later on. Because this project involves handling real capital, every part of the system must be predictable and isolated so that errors in one part cannot damage the rest of the system.
+To achieve this, I decomposed the bot into two main layers:
+	1.	System Core (Control & Coordination) – this includes the modules that control when the system runs, how modules communicate, and how errors are escalated.
+	2.	Functional Modules (Individual Responsibilities) – these modules handle reading data, making decisions, performing on-chain transactions, updating state, and communicating with the user.
+This decomposition also shows the computational methods used in the project: abstraction, iteration, decomposition, selection, and error handling.
+Below is the full set of modules and what they do.
+
+Layer 1 — System Core
+
+1. Scheduler & Cycle Controller
+This module runs every 15 seconds and controls the entire loop of the bot. It prevents overlapping cycles, handles sleep timing, timestamps each run, and checks whether the system is in safety-lock mode (meaning the fail-safe has activated). If safety-lock is enabled, the Scheduler skips all processing to avoid exposing the user to further risk.
+
+2. Dispatcher (Module Coordinator)
+The Dispatcher forwards outputs from one module to the next. It ensures the correct sequence: load config → fetch LP data → compare with previous cycle → make decision → execute plan → calculate PnL → update UI. This also separates each module, which increases maintainability.
+3. System Monitor (Fail-Safe Controller)
+This module monitors for critical errors (RPC failure, missing API responses, transaction failures, inconsistent price data). If a serious error occurs, it immediately:
+	•	halts all processing
+	•	converts all assets to stablecoin
+	•	sends critical alerts
+	•	writes safetyLock = true to Firestore
+	•	exits safely
+This guarantees capital protection.
+
+Layer 2 — Functional Modules
+
+4. Secrets & Config Manager
+Securely loads the user’s private key, risk setting, compounding preference, RPC URLs and Telegram token from Google Secret Manager + Firestore. All data is validated before being used.
+5. Market Data Fetcher
+Uses PancakeSwap APIs, CoinGecko/Binance price feeds(if needed), and on-chain web3 calls to build a complete and current view of the LP environment. Fully validates data (null/invalid checks, timestamp checks, duplicate checks) before passing it on.
+6. Delta & State Comparator
+Compares the current cycle’s data to the previous cycle snapshot. Calculates APR change, TVL volatility, and price movement. Detects anomalies like sudden APR drops or suspiciously low liquidity.
+7. Logic Engine (Decision Module)
+Applies risk rules, threshold logic, compounding logic, and ranking logic to decide whether the bot should rebalance or compound this cycle. Produces a structured execution plan describing exactly what needs to be done.
+
+8. Execution Engine (On-Chain Executor)
+Runs the actual blockchain operations:
+	•	token approvals
+	•	LP removal
+	•	swaps
+	•	adding new LP
+	•	staking
+	•	verifying transaction receipts
+If a transaction fails, it immediately raises a critical error flag.
+9. PnL & State Analytics
+Tracks cycle and cumulative PnL, gas usage, liquidity changes, net value, and position sizes. Saves everything to Firestore and updates the previous-cycle cache.
+10. Notification Layer
+Outputs final status to Telegram (clean summary view) and delivers detailed logs by email. Also sends critical alerts when fail-safe is activated.
+
+Having defined all of the individual modules above, this decomposition ensures that each part of the system has a single, clearly defined responsibility. This is particularly important for a system that operates autonomously and manages real financial assets, as it reduces the likelihood that an error in one area will propagate throughout the entire system. For example, issues with market data fetching are isolated from the execution logic, and failures in the user interface do not affect on-chain operations. This separation of concerns improves reliability, simplifies debugging, and makes the system easier to test and extend in the future. It also demonstrates the use of key computational methods such as abstraction, decomposition, selection, and iteration, which are essential for solving a complex, real-world problem using a computational approach.
+
+To further illustrate how these modules interact during runtime and how control flows through the system during each execution cycle, a system workflow diagram is used.
+
+(Image 3.1.1) – system workflow/fail safe execution cycle
+
+
+System architecture 
+While problem decomposition explains what components exist in the system, system architecture explains how these components are structured and how they interact with each other. The architecture defines the overall organisation of the system and ensures that data, control, and responsibility are clearly separated.
+Because this project operates continuously and interacts with live blockchain infrastructure, a layered architecture was chosen. This reduces coupling between components, improves security, and allows individual parts of the system to be modified or tested without affecting the entire system.
+The system is divided into three logical layers:
+	1.	Control & Logic Layer
+	2.	Data & Security Layer
+	3.	Interface Layer
+Each layer has a distinct role and communicates with other layers through well-defined interfaces.
+To illustrate this structure and the relationships between modules, a system architecture diagram is used.
+
+
+
+(image 3.1.2)-  System Architecture and Module Hierarchy
+
+Control And Logic Layer
+The Control & Logic Layer is responsible for coordinating the execution of the system and making all investment-related decisions. This layer contains the modules that determine when the system runs, what actions are taken, and whether execution should continue or be halted.
+Key modules in this layer include the Scheduler, Dispatcher, Logic Engine, Execution Engine, and Safety Controller. The Scheduler triggers the execution cycle every 15 seconds, while the Dispatcher ensures that modules are executed in the correct sequence. The Logic Engine evaluates market conditions and user preferences to decide whether rebalancing or compounding is required. The Execution Engine performs on-chain transactions based on the generated execution plan.
+The Safety Controller operates with priority over all other modules in this layer. If a critical error is detected, such as an RPC failure or unsuccessful transaction, the Safety Controller immediately interrupts normal execution and triggers the fail-safe procedure. This override capability is essential due to the involvement of real capital.
+
+Data and Security Layer
+The Data & Security Layer is responsible for storing, validating, and protecting all system data. This includes both sensitive information and operational state that must persist between execution cycles.
+Sensitive data, such as wallet private keys and API tokens, is stored using Google Secret Manager. This ensures that secrets are encrypted and isolated from application logic, reducing the risk of accidental exposure. Non-sensitive but persistent data, such as user configuration, previous-cycle snapshots, PnL history, and safety-lock state, is stored in Firestore.
+Market data fetched from PancakeSwap APIs, on-chain RPC calls, and external price feeds is processed through this layer before being passed to the Logic Engine. This ensures that all data entering the decision-making process has been validated for completeness, consistency, and freshness.
+By isolating data handling and security concerns in a dedicated layer, the system improves reliability and makes it easier to audit and extend in the future.
+
+Interface Layer
+The Interface Layer manages all communication between the system and the user. In this project, Telegram is used as the primary user interface, with email acting as a secondary logging and notification channel.
+The Telegram interface allows users to interact with the system through simple commands and buttons, such as importing a wallet, selecting a risk profile, enabling compounding, or resetting the system. Outputs from the system, including status updates, PnL summaries, and safety alerts, are formatted and delivered through this layer.
+Importantly, the Interface Layer does not make any investment decisions or perform on-chain actions. Instead, it acts purely as a presentation and input layer, forwarding user requests to the Control & Logic Layer and displaying results returned by the system. This separation ensures that user interaction cannot directly compromise system integrity.
+Architectural Justification
+This layered architecture was chosen because it aligns well with the requirements of an automated, safety-critical system. It supports abstraction by hiding implementation details between layers, decomposition by assigning clear responsibilities to each module, and robustness by allowing the Safety Controller to override execution when necessary.
+Overall, this architecture ensures that the system is modular, secure, and suitable for continuous autonomous operation.
+
+
+Key Variables and Data Structures
+In order for the system to operate autonomously, safely, and consistently across repeated execution cycles, a clear set of variables and data structures is required. These variables store user configuration, market data, system state, and performance metrics, and they allow information to persist between cycles where necessary.
+Because the system runs continuously and manages real financial assets, it is important to distinguish between temporary runtime data and persistent state. Temporary data is recalculated every cycle to ensure decisions are based on the most recent information, while persistent data is stored securely so that the system can recover correctly after restarts and avoid repeating unsafe actions.
+
+To support this, variables are grouped into three categories:
+	1.	Configuration and Security Data
+	2.	Market and Execution Data
+	3.	System State and Performance Data
+
+
+Configuration and Security Variables
+Configuration variables store user-defined preferences and sensitive credentials that control how the system behaves. These variables are not recalculated every cycle and must remain consistent unless explicitly changed by the user.
+Examples include the user’s selected risk profile, whether compounding is enabled, and whether the system is currently in a safety-locked state. Sensitive data such as the user’s wallet private key and API tokens are stored separately using Google Secret Manager to ensure they are encrypted and never exposed to application logs or runtime output.
+Separating configuration and security data from operational logic reduces risk and ensures that changes to user preferences do not directly interfere with execution logic.
+
+Market and Execution Variables
+Market variables store live data fetched during each execution cycle. This includes liquidity pool information such as APR, TVL, token pairs, and pool addresses, as well as external price data used for valuation and comparison.
+These variables exist only during a single cycle and are refreshed every 15 seconds. By recalculating market data each cycle rather than storing it persistently, the system avoids acting on outdated information and reduces the likelihood of incorrect rebalancing decisions.
+Execution-related variables are used to store the structured execution plan produced by the Logic Engine. This plan describes exactly what actions should be taken during the cycle, such as removing liquidity, swapping tokens, adding liquidity, or compounding rewards.
+System State and Performance Variables
+System state variables allow the system to track its own behaviour over time. This includes storing snapshots of previous-cycle data, tracking cumulative profit and loss, recording gas usage, and maintaining a safety-lock flag if a critical error occurs.
+Persistent storage of this information allows the system to compare current conditions with historical data and prevents repeated execution after a fail-safe event. This is particularly important for capital protection, as it ensures that once the system enters a locked state, no further on-chain actions can occur until the user manually resets the bot.
+
+Summary of Key Variables
+The table below summarises the most important variables used in the system, along with their purpose and storage location.
+Variable / Data Structure	Data Type / Structure	Purpose	Created / Updated at (Flowchart Step)	Used by Module(s)	Storage Location
+userConfig	Dictionary / Object	User preferences (risk, compounding, thresholds)	Load Config & Secrets	Config Manager, Logic Engine	Firestore
+riskProfile	Enum / String	User-selected risk mode (Low / Mid / High)	Load Config & Secrets	Logic Engine	Firestore
+compoundEnabled	Boolean	Whether compounding is enabled	Load Config & Secrets / User command	Logic Engine, Execution Engine	Firestore
+safetyLock	Boolean	Prevents execution after fail-safe event	Fail-safe / Reset	Scheduler, Safety Controller	Firestore
+privateKeySecretId	String (reference)	Reference to encrypted private key	Wallet Import	Config Manager	Firestore
+walletAddress	String	Public wallet address	Load Config & Secrets	Data Fetcher, Execution Engine	Firestore
+lpPoolList	List of Objects	Candidate liquidity pools	Fetch Market Data	Market Fetcher, Logic Engine	Runtime
+lpMetrics	Dictionary / Object	APR, TVL, volume per pool	Fetch Market Data	Comparator, Logic Engine	Runtime
+priceFeed	Dictionary	Token prices	Fetch Market Data	Comparator, PnL Engine	Runtime
+previousCycleSnapshot	Object	Previous cycle state snapshot	End of Cycle	Comparator	Firestore
+executionPlan	Object	Structured on-chain action plan	Build Execution Plan	Execution Engine	Runtime
+walletBalances	Dictionary	Token balances before/after execution	On-chain Execution	Execution Engine, PnL Engine	Runtime
+cyclePnL	Float	PnL for current cycle	Calculate PnL	PnL Engine	Runtime
+totalPnL	Float	Cumulative PnL	Calculate PnL	PnL Engine	Firestore
+errorLogEntry	Object	Error details and logs	Log Error	Safety Controller	Firestore
+
+
+(table here – table 3.1.3: Key Variables and Data Structures)
+
+This table links each variable to the stage of the system workflow in which it is created or updated, ensuring traceability between the design, the system flowchart, and the implementation.
+
+Justification
+The variables shown in Table 3.1.3 were selected to support a modular, safe, and traceable system design. Each variable represents a clearly defined piece of system state and is deliberately limited in scope to reduce coupling between modules. For example, configuration variables such as userConfig, riskProfile, and compoundEnabled are loaded once at the start of each cycle and are treated as read-only by decision-making modules, which prevents accidental modification during execution.
+Runtime variables such as lpMetrics, priceFeed, and executionPlan are stored in memory only and recalculated every cycle to ensure decisions are based on current market conditions. This design choice avoids reliance on stale data and supports the iterative nature of the 15-second execution loop. In contrast, persistent variables such as previousCycleSnapshot, totalPnL, and safetyLock are stored in Firestore to allow continuity between cycles and to enforce fail-safe behaviour across system restarts.
+Security-critical data is handled through abstraction rather than direct storage. The private key itself is never stored directly within the application; instead, a reference (privateKeySecretId) is used to retrieve the encrypted key from secure storage. This reduces the risk of accidental exposure while still allowing the execution engine to perform on-chain operations when required.
+Overall, this variable design ensures that each stage of the workflow has access only to the data it requires, improving reliability, maintainability, and safety when operating with real user funds.
+
+
+
+Algorithms and Logic Design
+
+Scheduler & Cycle Control Algorithm
+
+The Scheduler is responsible for controlling when the system runs and ensuring that each execution cycle is isolated, predictable, and safe. Because the system operates using real user capital, it is critical that cycles do not overlap and that execution only occurs when the system is in a valid state.
+
+The Scheduler runs on a fixed 15-second interval, which represents a balance between responsiveness and stability. At the start of each cycle, the Scheduler checks the global safetyLock variable. If safetyLock is set to true, the cycle is immediately terminated and no further processing occurs. This ensures that once a fail-safe event has been triggered, the system cannot accidentally resume execution without explicit user intervention.
+
+If the system is not in safety-lock mode, the Scheduler records a timestamp for the current cycle and prevents any new cycle from starting until the current one has completed. This avoids race conditions such as duplicated transactions or conflicting state updates, which could otherwise lead to financial loss.
+
+Once these checks have passed, control is passed to the Dispatcher module, which coordinates the remaining stages of the workflow in a fixed sequence. This sequence is shown in Flowchart 3.1.1, where the Scheduler acts as the entry and exit point for each execution loop. At the end of a successful cycle, the Scheduler places the system into a controlled sleep state until the next 15-second interval begins.
+
+This algorithm makes extensive use of iteration, as the execution cycle repeats continuously, and selection, through conditional checks such as whether safetyLock is enabled. By centralising timing and execution control within a single module, the system ensures predictable behaviour and reduces the risk of uncontrolled execution.
+
+Pseudocode — Scheduler & Cycle Control
+IF safetyLock = TRUE THEN  
+    EXIT current cycle  
+END IF  
+SET currentTimestamp = system_time  
+CALL Dispatcher  
+WAIT until Dispatcher has finished execution  
+Justification
+
+This approach is suitable because it abstracts timing and control away from the functional logic of the system. Individual modules do not need to manage scheduling or concurrency, which reduces complexity and improves reliability. By enforcing a strict cycle structure, the Scheduler ensures that each decision is based on a complete and consistent snapshot of system state.
+
+
+Market Data Fetching and Validation Algorithm
+This algorithm is responsible for collecting all external data required for decision-making and ensuring that the data is valid before it is used anywhere else in the system. Because the system operates using live blockchain and API data, incorrect or incomplete data could result in unsafe execution. For this reason, data fetching and validation are treated as a single controlled stage within the execution cycle.
+
+At the start of each cycle, the Market Data Fetcher retrieves liquidity pool data from PancakeSwap sources and price data from external price feeds. This includes metrics such as APR, TVL, pool identifiers, token pairs, and current token prices. All data is collected within the same cycle to ensure consistency across calculations.
+
+Once data is retrieved, a validation phase is performed before the data is passed to downstream modules. This validation checks that responses are not null, timestamps are recent, values fall within expected ranges, and that no duplicate or inconsistent data is present. If any critical validation check fails, the algorithm immediately raises an error flag and hands control to the System Monitor, preventing unsafe decisions from being made.
+
+Only after all validation checks pass is the data packaged into structured runtime variables (lpPoolList, lpMetrics, and priceFeed) and forwarded to the Delta & State Comparator. This ensures that all later algorithms operate on a trusted and complete dataset.
+
+This stage uses iteration, as multiple pools and tokens are processed, and selection, through conditional validation checks that determine whether execution can safely continue.
+
+Pseudocode — Market Data Fetching and Validation
+
+FETCH lpPoolData from PancakeSwap
+FETCH priceData from price feeds
+
+IF lpPoolData is NULL OR priceData is NULL THEN
+  RAISE critical error
+  EXIT cycle
+END IF
+
+FOR EACH pool IN lpPoolData
+  IF pool.apr is NULL OR pool.tvl <= 0 THEN
+    RAISE critical error
+    EXIT cycle
+  END IF
+END FOR
+
+FOR EACH token IN priceData
+  IF token.price <= 0 OR token.timestamp is outdated THEN
+    RAISE critical error
+    EXIT cycle
+  END IF
+END FOR
+
+STORE validated data in runtime structures
+PASS data to Delta Comparator
+
+
+Justification
+Separating data fetching from decision logic ensures that invalid or incomplete data cannot influence execution. By validating all external inputs before they are used, the system reduces the risk of incorrect rebalancing decisions caused by API failures, stale prices, or malformed responses. This approach is essential for maintaining safety and reliability when operating autonomously in a volatile and decentralised environment.
+Decision-Making and Rebalancing Algorithm
+
+This algorithm is responsible for deciding whether the system should take action during the current execution cycle. Unlike the previous stages, which focus on control and data integrity, this stage evaluates market conditions and user preferences to determine what, if anything, should be executed on-chain.
+
+At the start of this stage, the algorithm receives validated market data and the previous cycle snapshot from the Delta & State Comparator. The first step is to calculate relative changes between cycles, such as APR movement, TVL change, and price volatility. These values are used instead of raw figures to reduce sensitivity to short-term noise and to ensure decisions are based on meaningful trends rather than isolated spikes.
+
+Once deltas have been calculated, the algorithm applies a risk-based filtering process. Liquidity pools that do not meet the user’s selected risk profile are removed from consideration. For example, pools with low liquidity or excessive volatility may be excluded when the user has selected a low-risk configuration. This filtering stage reduces the decision space and prevents the system from considering unsuitable options.
+
+After filtering, the remaining pools are ranked using a weighted scoring approach based on metrics such as adjusted APR, liquidity depth, and stability. The highest-ranked pool is then compared against the user’s current position. If the difference between the current pool and the best available alternative exceeds a predefined threshold, the algorithm determines that a rebalance is required. If compounding is enabled and no rebalance condition is met, the algorithm checks whether rewards should be compounded instead.
+
+The output of this process is an explicit decision state (NO_ACTION, REBALANCE, or COMPOUND) along with a structured execution plan describing the exact actions required. If no conditions are met, the system takes no action and proceeds to the end of the cycle.
+
+This algorithm makes heavy use of selection, through conditional decision rules, and iteration, as multiple pools are evaluated and compared during each cycle.
+
+
+Pseudocode — Decision-Making and Rebalancing
+CALCULATE deltaMetrics using currentData and previousCycleSnapshot
+FILTER pools based on riskProfile
+FOR EACH pool IN filteredPools
+  CALCULATE poolScore
+END FOR
+SELECT bestPool with highest poolScore
+IF bestPool ≠ currentPool AND scoreDifference > rebalanceThreshold THEN
+  SET decision = REBALANCE
+  BUILD executionPlan for rebalance
+ELSE IF compoundEnabled = TRUE AND rewardsAvailable = TRUE THEN
+  SET decision = COMPOUND
+  BUILD executionPlan for compounding
+ELSE
+  SET decision = NO_ACTION
+END IF
+RETURN decision and executionPlan
+
+Justification
+
+Using a threshold-based and risk-filtered decision process prevents unnecessary transactions and reduces exposure to short-term market volatility. By explicitly separating decision logic from execution logic, the system remains predictable and easier to test. This approach ensures that on-chain actions are only taken when there is a clear and justifiable benefit, which is essential when operating autonomously with real user funds.
+
+
+
+
+
+
+
+
+Fail-Safe and Error Handling Algorithm
+
+The fail-safe algorithm is designed to protect user funds in the event of critical system failures. Because the system operates autonomously and interacts directly with blockchain infrastructure, it must be able to respond immediately to unsafe conditions without relying on user intervention.
+
+Throughout each execution cycle, the System Monitor continuously listens for error signals raised by other modules. These errors include, but are not limited to: RPC connection failures, invalid or inconsistent market data, failed on-chain transactions, and unexpected execution states. Not all errors are treated equally; only errors classified as critical will trigger the fail-safe mechanism.
+
+When a critical error is detected, normal execution is immediately halted. The algorithm then initiates an emergency sequence that converts all active positions into a stablecoin. This is done to minimise further exposure to market volatility while the system is in an unsafe state. Once this operation has completed, the system records the event, activates the safetyLock variable, and prevents all future execution cycles from running.
+
+After the fail-safe sequence has finished, the user is notified through the Telegram interface and a detailed error log is stored for later inspection. The system remains in safety-lock mode until the user explicitly resets it, ensuring that execution cannot silently resume after a serious failure.
+
+This algorithm relies heavily on selection, as it must distinguish between recoverable and non-recoverable errors, and abstraction, as complex error conditions are reduced to a small set of critical triggers.
+
+
+
+
+
+
+
+
+Pseudocode — Fail-Safe and Error Handling
+IF criticalErrorDetected = TRUE THEN
+  HALT all processing
+  EXECUTE emergencySwap to stablecoin
+  SET safetyLock = TRUE
+  LOG error details
+  NOTIFY user
+  EXIT system
+END IF
+
+Justification
+This approach ensures that capital protection is prioritised over continued operation. By automatically converting assets to stablecoin and locking the system after a critical failure, the risk of cascading errors and further losses is significantly reduced. Separating fail-safe logic from normal execution also makes the system easier to reason about and test, which is essential for a system that manages real financial value.
+
+
+User Interface Design
+The user interface for this system is implemented entirely through a Telegram bot. This design choice was made to prioritise accessibility, speed, and ease of use, while avoiding the complexity and overhead of building a traditional web-based interface. Most users interacting with decentralised finance tools are already familiar with Telegram-based bots, which makes this interface suitable for the target audience.
+The Telegram interface acts as a control and monitoring layer, not as a place where core logic is executed. All sensitive operations, such as decision-making and on-chain execution, occur within the system core. The interface simply allows the user to view system state, adjust settings, and receive notifications.
+
+
+
+
+
+Interface Structure
+The interface is message-based and consists of three main components:
+1.	Status Display
+o	Shows current wallet balance
+o	Displays active liquidity pool and position size
+o	Shows current cycle PnL and cumulative PnL
+o	Indicates whether compounding is enabled
+o	Displays system state (active / paused / safety-lock)
+This information is presented in a structured text layout to ensure clarity and reduce cognitive load.
+2.	User Input Controls
+o	Buttons are provided for:
+	enabling or disabling compounding
+	changing risk profile (low / medium / high)
+	pausing or resuming the bot
+	resetting the system after a safety-lock event
+o	Buttons are chosen instead of free-text input to prevent invalid commands and reduce user error.
+3.	Notification and Alert System
+o	Normal execution updates are sent after each completed cycle
+o	Critical alerts are sent immediately if the fail-safe is triggered
+o	Messages are updated in place where possible to avoid clutter and outdated information
+This interface design is supported by Flowchart 3.1.5, which shows how user interactions feed into the system and how system outputs are reflected back to the user.
+
+
+
+
+
+Justification
+
+Using Telegram as the interface abstracts away the complexity of front-end development while still providing a responsive and interactive user experience. The separation between interface and system logic improves security, as the interface never directly handles private keys or executes transactions. By restricting user input to predefined actions, the system reduces the risk of incorrect configuration and ensures predictable behavior.
+
+
+Testing Strategy
+The testing strategy for this project is designed to ensure that the system behaves correctly under normal conditions and, more importantly, fails safely under abnormal conditions. Because the system interacts with live blockchain infrastructure and real user capital, testing focuses on correctness, reliability, and risk containment rather than performance alone.
+Testing is planned to take place at three levels: unit testing, integration testing, and system-level testing. Each level targets a different type of failure and helps ensure that issues are detected as early as possible.
+Unit Testing
+Unit testing is used to verify the behaviour of individual modules in isolation. This includes testing logic such as:
+•	risk filtering and pool ranking calculations
+•	decision thresholds for rebalancing and compounding
+•	validation rules for incoming market data
+•	safety-lock activation conditions
+Mock data is used to simulate API responses and on-chain data so that logic can be tested deterministically without relying on live services. This ensures that core algorithms behave as expected before they are integrated into the full system.
+Integration Testing
+Integration testing focuses on how modules interact with each other. This includes testing:
+•	the handoff between data fetching and decision-making
+•	the passing of execution plans to the execution engine
+•	correct state updates between cycles
+•	interaction between the system core and the notification layer
+These tests ensure that data flows correctly through the system workflow shown in Flowchart 3.1.1 and that no module produces outputs that break downstream logic.
+System and Fail-Safe Testing
+System-level testing is used to verify end-to-end behaviour. This includes running full execution cycles using controlled inputs and observing:
+•	correct cycle timing
+•	correct execution decisions
+•	correct user notifications
+Special emphasis is placed on fail-safe testing. Faults such as API timeouts, invalid data, and transaction failures are deliberately injected to confirm that:
+•	execution is halted immediately
+•	assets are converted to stablecoin
+•	the system enters safety-lock mode
+•	users are notified correctly
+This ensures that the system behaves predictably even in worst-case scenarios.
+
+Justification
+This layered testing strategy reduces risk by catching errors early and ensuring that failures are contained. By testing both normal operation and failure conditions, the system can be validated not just for correctness, but also for safety. This is essential for a system that operates autonomously and manages real financial value.
+
+
+
+
+
+
+
+Traceability to Success Criteria
+
+This subsection explains how the design decisions made in this section ensure that the system can be evaluated accurately against the success criteria defined in the Analysis section. By explicitly linking design features to measurable outcomes, it ensures that the final evaluation is objective rather than subjective.
+
+Each major component of the system has been designed to directly support one or more success criteria. For example, the Scheduler and Cycle Control algorithm ensures that the system operates reliably at fixed intervals, which supports success criteria related to system stability and correct execution timing. The Market Data Fetching and Validation algorithm supports criteria relating to data accuracy and decision reliability, as only validated data is allowed to influence execution.
+
+The Decision-Making and Rebalancing algorithm supports success criteria related to profitability and risk control by ensuring that rebalancing only occurs when predefined thresholds are met and user-selected risk settings are respected. This allows success to be measured by observing whether unnecessary trades are avoided and whether the system behaves in line with user configuration.
+
+The Fail-Safe and Error Handling algorithm directly supports safety-related success criteria. Its ability to halt execution, convert assets to stablecoin, and lock the system after a critical error provides a clear and testable condition for capital protection. This can be evaluated by deliberately injecting failures and observing whether the correct safety behaviour occurs.
+
+The Telegram-based user interface supports usability-related success criteria. Because all key system states, balances, and decisions are visible to the user in a structured format, usability can be measured through user feedback and task completion without requiring technical knowledge of the underlying system.
+
+Overall, the design ensures that every success criterion has a corresponding mechanism within the system that can be tested and verified. This traceability makes the evaluation stage clear, measurable, and aligned with the original aims of the project.
+
